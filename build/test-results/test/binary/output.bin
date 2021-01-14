@@ -1,5 +1,5 @@
-Request method:	DELETE
-5Request URI:	http://localhost:8080/app/videogames/11
+Request method:	POST
+2Request URI:	http://localhost:8080/app/videogames
 Proxy:			<none>
 Request params:	<none>
 Query params:	<none>
@@ -9,12 +9,20 @@
 1				Content-Type=application/json; charset=UTF-8
 Cookies:		<none>
 Multiparts:		<none>
-Body:			<none>
+Body:
+{
+    "id": 11,
+    "name": "Bloodborne",
+/    "releaseDate": "2021-01-14T16:59:51.198Z",
+    "reviewScore": 99,
+    "category": "SoulsLike",
+    "rating": "Awesome"
+}
 HTTP/1.1 200 
 Content-Type: application/json
-Content-Length: 41
-$Date: Thu, 14 Jan 2021 17:48:20 GMT
+Content-Length: 39
+$Date: Thu, 14 Jan 2021 19:16:31 GMT
 
 {
-,    "status": "Record Deleted Successfully"
+*    "status": "Record Added Successfully"
 }

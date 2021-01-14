@@ -1,13 +1,15 @@
-import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.lessThan;
 
+import config.GamePojo;
 import config.VideoGameAPIConfig;
 import config.VideoGameAPIEndpoints;
 import io.restassured.response.Response;
 import org.junit.Test;
 import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 
 public class FirstTest extends VideoGameAPIConfig {
@@ -20,7 +22,7 @@ public class FirstTest extends VideoGameAPIConfig {
     }
 
     @Test
-    public void createGame11JSON(){
+    public void createGameId11(){
 
         String gameJSON = "{\n" +
                 "    \"id\": 11,\n" +
@@ -45,11 +47,46 @@ public class FirstTest extends VideoGameAPIConfig {
     }
 
     @Test
-    public void deleteGame11JSON(){
+    public void deleteGameId11(){
         given().
 
         when().
                 delete(VideoGameAPIEndpoints.ALL_VIDEO_GAMES + "/11").
+        then();
+    }
+
+    @Test
+    public void createGame12Pojo(){
+        GamePojo gamePojo = new GamePojo(12, "Dark Souls 3", "2021-01-14", 99, "SoulsLike", "Perfect");
+        given().
+                body(gamePojo).
+        when().
+                post(VideoGameAPIEndpoints.ALL_VIDEO_GAMES).
+        then();
+
+    }
+
+    @Test
+    public void getGame12(){
+        given().
+
+        when().
+                get(VideoGameAPIEndpoints.ALL_VIDEO_GAMES + "/12").
+        then().
+                body("id", equalTo(12)).
+                body("name", equalTo("Dark Souls 3")).
+                body("releaseDate", equalTo("2021-01-14")).
+                body("reviewScore", equalTo(99)).
+                body("category", equalTo("SoulsLike")).
+                body("rating", equalTo("Perfect"));
+    }
+
+    @Test
+    public void deleteGameId12(){
+        given().
+
+        when().
+                delete(VideoGameAPIEndpoints.ALL_VIDEO_GAMES + "/12").
         then();
     }
 }
